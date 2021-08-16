@@ -1,6 +1,10 @@
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
-let currentQuestion = document.getElementById('card-question')
+let currentQuestion = {
+    elem: document.getElementById('card-question'),
+    questionNum: 0
+}
+let answers = document.querySelectorAll('li label')
 let submitButton = document.getElementById('submit')
 let timeLeft = document.getElementById('time-left')
 let nextQuestionButton = document.getElementById('next-question')
@@ -11,55 +15,85 @@ const questions = [
         isCorrect: false
     },
     {
-        question: 'What is my name?',
+        question: '2',
+        answers: [5, 6, 7, 8],
+        isCorrect: false
+    },
+    {
+        question: '3',
         answers: [1, 2, 3, 4],
         isCorrect: false
     },
     {
-        question: 'What is my name?',
+        question: '4',
         answers: [1, 2, 3, 4],
         isCorrect: false
     },
     {
-        question: 'What is my name?',
-        answers: [1, 2, 3, 4],
-        isCorrect: false
-    },
-    {
-        question: 'What is my name?',
+        question: '5',
         answers: [1, 2, 3, 4],
         isCorrect: false
     }
 ]
+let timer
+let startTime = questions.length * 30 + 30
 
 
 
 function startQuiz() {
     quizContainer.style.visibility = 'visible'
-    currentQuestion.textContent =  questions[0]['question']
-    let startTime = 5
+    startButton.style.visibility = 'hidden'
+    updateQuestion()
+}
+
+function startTimer() {
+
     timeLeft.innerText = startTime
-    let x = setInterval(function(){
+    timer = setInterval(function () {
         startTime--
         timeLeft.innerText = startTime
-        if (startTime === 0) {
+        if (startTime <= 0) {
+
             endQuiz()
-            clearInterval(x)
+            clearInterval(timer)
         }
     }, 1000)
 }
 
 function submitAnswer(e) {
     e.preventDefault()
+    if (timer) {
+        clearInterval(timer)
+        timer = null
+    }
     console.log('Answer has been submitted')
+    nextQuestionButton.style.visibility = 'visible'
 }
 
-function nextQuestion(e) {
-    e.preventDefault()
-    console.log('The next question is displayed')
+function updateQuestion() {
+    if (/* Question was correct*/ true) {
+
+        startTime -= 30
+
+    }
+    if (currentQuestion.questionNum >= questions.length) {
+        endQuiz()
+    } else {
+        startTimer()
+        currentQuestion.elem.textContent = questions[currentQuestion.questionNum]['question']
+        answers.forEach(function(answer, i){
+            answer.innerText = questions[currentQuestion.questionNum].answers[i]
+        })
+        currentQuestion.questionNum++
+        console.log('The next question is displayed')
+    }
+    nextQuestionButton.style.visibility = 'hidden'
 }
 
 function endQuiz() {
+    startTime = 0
+    timeLeft.innerText = startTime
+    submitButton.style.visibility = 'hidden'
     console.log('Quiz has ended')
 }
 
@@ -67,4 +101,4 @@ startButton.addEventListener('click', startQuiz)
 
 submitButton.addEventListener('click', submitAnswer)
 
-nextQuestionButton.addEventListener('click', nextQuestion)
+nextQuestionButton.addEventListener('click', updateQuestion)

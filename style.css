@@ -6,8 +6,9 @@
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    width: 30%;
+    width: max-content;
     margin: 50px auto;
+    padding: 20px;
     justify-content: center;
     visibility: hidden;
     box-shadow: 0px 0px 5px rgb(104, 104, 104), 0px 0px 20px rgb(180, 180, 180);
@@ -57,7 +58,19 @@ ul li{
 #start-quiz:hover {
   background-color: #F082AC;
 }
+#card-footer {
 
+}
 input[type="submit"] {
     margin: 0 auto;
+}
+
+button[id="next-question"] {
+    display: block;
+    width: fit-content;
+    margin: auto;
+
+}
+#time {
+    text-align: center;
 }

@@ -17,9 +17,9 @@
     </header>
     <main>
         <button id="start-quiz"> Start Quiz! </button>
+        <div id="time">Time left: <span id="time-left"></span></div>
         <div id="card-container">
-            <h2 id="card-question">Question goes here?</h2>
-            <div id="time">Time left: <span id="time-left"></span></div>
+            <h2 id="card-question"></h2>
             <form id="card-answers">
                 <ul>
                     <li>
@@ -46,9 +46,11 @@
                     </li>
                 </ul>
                 <input type="submit" id="submit" value="Submit"/>
-                <button id="next-question">Next Question --></button>
             </form>
-            <h3 id="card-footer"></h3>
+            <section id="card-footer">
+                <h3 id="question-result"></h3>
+                <button id="next-question">Next Question</button>
+            </section>
         </div>
     </main>
     <footer>
