@@ -4,6 +4,7 @@ let currentQuestion = {
     elem: document.getElementById('card-question'),
     questionNum: 0
 }
+let answerContainer = document.getElementById('card-answers')
 let submitButton = document.getElementById('submit')
 let timeLeft = document.getElementById('time-left')
 let nextQuestionButton = document.getElementById('next-question')
@@ -36,6 +37,7 @@ const questions = [
 ]
 let timer
 let startTime = questions.length * 30 + 30
+let points = 0
 
 
 
@@ -72,13 +74,19 @@ function submitAnswer(e) {
 function updateQuestion() {
     // Make sure the question is correct, if so, add points
     if (true) {
-        
+        points += 10
     }
     if (currentQuestion.questionNum >= questions.length) {
         endQuiz()
     } else {
         startTimer()
         currentQuestion.elem.textContent = questions[currentQuestion.questionNum]['question']
+        for (let i = 0; i < questions[currentQuestion.questionNum]['answers'].length; i++) {
+            let ansButton = document.createElement('input')
+            ansButton.setAttribute('type', 'button')
+            ansButton.setAttribute('value', questions[currentQuestion.questionNum].answers[i])
+            answerContainer.prepend(ansButton)
+        }
         currentQuestion.questionNum++
         startTime -= 30
         console.log('The next question is displayed')
