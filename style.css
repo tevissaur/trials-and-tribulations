@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    width: 20%;
+    width: max-content;
     margin: 50px auto;
     padding: 20px;
     justify-content: center;
@@ -36,7 +36,7 @@
 }
 
 #start-quiz {
-  background-color: #EA4C89;
+  background-color: #bd4cea;
   border-radius: 8px;
   border-style: none;
   color: #FFFFFF;
@@ -50,7 +50,7 @@
 }
 
 #start-quiz:hover {
-  background-color: #F082AC;
+  background-color: #bd85ea;
 }
 #card-footer {
     margin: auto;
@@ -61,6 +61,16 @@ input[type="submit"] {
 input[type="button"] {
     margin: 10px 0;
     width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+}
+
+input[type="button"]:hover {
+    border: 2px solid black;
 }
 
 button[id="next-question"] {
@@ -72,4 +82,12 @@ button[id="next-question"] {
 #time {
     text-align: center;
     margin: 10px;
+}
+
+.wrong {
+    background-color: rgba(255, 98, 98, 0.486);
+}
+
+.correct {
+    background-color: rgba(98, 255, 98, 0.486);
 }

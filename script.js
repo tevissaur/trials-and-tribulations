@@ -10,19 +10,25 @@ let timeLeft = document.getElementById('time-left')
 let nextQuestionButton = document.getElementById('next-question')
 const questions = [
     {
-        question: 'What is my name?',
-        answers: ['Tevis', 'Reilly', 'Monika', 'Mikulova'],
-        correctAnswer: 'Tevis'
+        question: 'Which keyword defines a function?',
+        answers: ['function', 'def', 'define', 'static void main'],
+        correctAnswer: 'function'
     },
     {
-        question: '2',
-        answers: [5, 6, 7, 8],
-        correctAnswer: false
+        question: 'Which syntax correctly initiates a for loop?',
+        answers: ['for (var i = 0: i < 10: i++){}',
+            'for (i is 0; i < 10; i+){}',
+            'for i in array.length:',
+            'for (var i = 0; i < 10; i++){}'],
+        correctAnswer: 'for (var i = 0; i < 10; i++){}'
     },
     {
-        question: '3',
-        answers: [1, 2, 3, 4],
-        correctAnswer: false
+        question: 'DOM stand for:',
+        answers: ['Documents Oriented Modeling', 
+        'Document Object Model', 
+        'Document Object Manipulation', 
+        'Documents Over Manuals'],
+        correctAnswer: 'Document Object Model'
     },
     {
         question: '4',
@@ -38,7 +44,7 @@ const questions = [
 let timer
 let startTime = questions.length * 30
 let points = 0
-let ansArray = []
+let ansArray
 
 
 function startQuiz() {
@@ -48,13 +54,11 @@ function startQuiz() {
 }
 
 function startTimer() {
-
     timeLeft.innerText = startTime
     timer = setInterval(function () {
         startTime--
         timeLeft.innerText = startTime
         if (startTime <= 0) {
-
             endQuiz()
             clearInterval(timer)
         }
@@ -66,18 +70,21 @@ function submitAnswer(e) {
     for (i in ansArray) {
         ansArray[i].removeEventListener('click', submitAnswer)
     }
-    // Make sure the question is correct, if so, add points
+
+    // Make sure the question is correct, if so, add points and changes answer red or green
     if (e.target.value === questions[currentQuestion.questionNum].correctAnswer) {
         points += 10
         console.log('Correct Answer')
-        e.target.style.backgroundColor = 'green'
+        e.target.classList.add('correct')
         startTime -= 30
     } else {
         console.log('Wrong Answer')
-        e.target.style.backgroundColor = 'red'
+        e.target.classList.add('wrong')
         startTime -= 30
     }
     currentQuestion.questionNum++
+
+    // Stops the timer until the user presses next question button
     if (timer) {
         clearInterval(timer)
         timer = null
@@ -87,9 +94,12 @@ function submitAnswer(e) {
     nextQuestionButton.style.visibility = 'visible'
 }
 
+
+// Displays the question and generates the buttons for the answers
 function updateQuestion() {
     answerContainer.innerHTML = ''
-    if (currentQuestion.questionNum >= questions.length) {
+    ansArray = []
+    if (currentQuestion.questionNum > (questions.length - 1)) {
         endQuiz()
     } else {
         startTimer()
