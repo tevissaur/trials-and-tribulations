@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    width: max-content;
+    width: 20%;
     margin: 50px auto;
     padding: 20px;
     justify-content: center;
@@ -15,9 +15,10 @@
 }
 #card-question {
     margin: 10px auto;
+    padding-bottom: 5px;
     height: 25%;
-    width: 80%;
-    border-bottom: 2px solid black;
+    width: 100%;
+    border-bottom: 1px solid black;
     text-align: justify;
 }
 #card-answers {
@@ -58,7 +59,8 @@ input[type="submit"] {
     margin: 0 auto;
 }
 input[type="button"] {
-    margin: 10px auto;
+    margin: 10px 0;
+    width: fit-content;
 }
 
 button[id="next-question"] {
@@ -69,4 +71,5 @@ button[id="next-question"] {
 }
 #time {
     text-align: center;
+    margin: 10px;
 }

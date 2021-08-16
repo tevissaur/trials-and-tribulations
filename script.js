@@ -12,33 +12,33 @@ const questions = [
     {
         question: 'What is my name?',
         answers: ['Tevis', 'Reilly', 'Monika', 'Mikulova'],
-        isCorrect: false
+        correctAnswer: 'Tevis'
     },
     {
         question: '2',
         answers: [5, 6, 7, 8],
-        isCorrect: false
+        correctAnswer: false
     },
     {
         question: '3',
         answers: [1, 2, 3, 4],
-        isCorrect: false
+        correctAnswer: false
     },
     {
         question: '4',
         answers: [1, 2, 3, 4],
-        isCorrect: false
+        correctAnswer: false
     },
     {
         question: '5',
         answers: [1, 2, 3, 4],
-        isCorrect: false
+        correctAnswer: false
     }
 ]
 let timer
-let startTime = questions.length * 30 + 30
+let startTime = questions.length * 30
 let points = 0
-
+let ansArray = []
 
 
 function startQuiz() {
@@ -63,19 +63,32 @@ function startTimer() {
 
 function submitAnswer(e) {
     e.preventDefault()
+    for (i in ansArray) {
+        ansArray[i].removeEventListener('click', submitAnswer)
+    }
+    // Make sure the question is correct, if so, add points
+    if (e.target.value === questions[currentQuestion.questionNum].correctAnswer) {
+        points += 10
+        console.log('Correct Answer')
+        e.target.style.backgroundColor = 'green'
+        startTime -= 30
+    } else {
+        console.log('Wrong Answer')
+        e.target.style.backgroundColor = 'red'
+        startTime -= 30
+    }
+    currentQuestion.questionNum++
     if (timer) {
         clearInterval(timer)
         timer = null
     }
+
     console.log('Answer has been submitted')
     nextQuestionButton.style.visibility = 'visible'
 }
 
 function updateQuestion() {
-    // Make sure the question is correct, if so, add points
-    if (true) {
-        points += 10
-    }
+    answerContainer.innerHTML = ''
     if (currentQuestion.questionNum >= questions.length) {
         endQuiz()
     } else {
@@ -85,10 +98,11 @@ function updateQuestion() {
             let ansButton = document.createElement('input')
             ansButton.setAttribute('type', 'button')
             ansButton.setAttribute('value', questions[currentQuestion.questionNum].answers[i])
-            answerContainer.prepend(ansButton)
+            answerContainer.appendChild(ansButton)
+            ansButton.addEventListener('click', submitAnswer)
+            ansArray.push(ansButton)
         }
-        currentQuestion.questionNum++
-        startTime -= 30
+
         console.log('The next question is displayed')
     }
     nextQuestionButton.style.visibility = 'hidden'
@@ -97,12 +111,11 @@ function updateQuestion() {
 function endQuiz() {
     startTime = 0
     timeLeft.innerText = startTime
-    submitButton.style.visibility = 'hidden'
     console.log('Quiz has ended')
 }
 
 startButton.addEventListener('click', startQuiz)
 
-submitButton.addEventListener('click', submitAnswer)
+
 
 nextQuestionButton.addEventListener('click', updateQuestion)
