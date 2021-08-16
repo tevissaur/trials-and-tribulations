@@ -1,11 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
 #card-container {
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    width: 45%;
+    width: 30%;
     margin: 50px auto;
     justify-content: center;
-    box-shadow: 0px 0px 10px gray;
+    visibility: hidden;
+    box-shadow: 0px 0px 5px rgb(104, 104, 104), 0px 0px 20px rgb(180, 180, 180);
 }
 #card-question {
     margin: 10px auto;
@@ -24,10 +29,6 @@
 #card-answers label {
     width: min-content;
 }
-#card-answers input{
-    width:min-content;
-    margin: 10px;
-}
 ul li{
     display: flex;
     justify-content: space-between;
@@ -37,4 +38,26 @@ ul li{
     margin: 50px auto;
     text-align: center;
     width: 60%;
+}
+
+#start-quiz {
+  background-color: #EA4C89;
+  border-radius: 8px;
+  border-style: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  height: 40px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  text-align: center;
+}
+
+#start-quiz:hover {
+  background-color: #F082AC;
+}
+
+input[type="submit"] {
+    margin: 0 auto;
 }
