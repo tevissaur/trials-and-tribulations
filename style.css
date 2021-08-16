@@ -27,14 +27,7 @@
     flex-wrap: wrap;
     margin: 10px;
 }
-#card-answers label {
-    width: min-content;
-}
-ul li{
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-}
+
 #heading-title {
     margin: 50px auto;
     text-align: center;
@@ -59,10 +52,13 @@ ul li{
   background-color: #F082AC;
 }
 #card-footer {
-
+    margin: auto;
 }
 input[type="submit"] {
     margin: 0 auto;
+}
+input[type="button"] {
+    margin: 10px auto;
 }
 
 button[id="next-question"] {

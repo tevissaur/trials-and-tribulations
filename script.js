@@ -4,14 +4,13 @@ let currentQuestion = {
     elem: document.getElementById('card-question'),
     questionNum: 0
 }
-let answers = document.querySelectorAll('li label')
 let submitButton = document.getElementById('submit')
 let timeLeft = document.getElementById('time-left')
 let nextQuestionButton = document.getElementById('next-question')
 const questions = [
     {
         question: 'What is my name?',
-        answers: [1, 2, 3, 4],
+        answers: ['Tevis', 'Reilly', 'Monika', 'Mikulova'],
         isCorrect: false
     },
     {
@@ -71,20 +70,17 @@ function submitAnswer(e) {
 }
 
 function updateQuestion() {
-    if (/* Question was correct*/ true) {
-
-        startTime -= 30
-
+    // Make sure the question is correct, if so, add points
+    if (true) {
+        
     }
     if (currentQuestion.questionNum >= questions.length) {
         endQuiz()
     } else {
         startTimer()
         currentQuestion.elem.textContent = questions[currentQuestion.questionNum]['question']
-        answers.forEach(function(answer, i){
-            answer.innerText = questions[currentQuestion.questionNum].answers[i]
-        })
         currentQuestion.questionNum++
+        startTime -= 30
         console.log('The next question is displayed')
     }
     nextQuestionButton.style.visibility = 'hidden'
