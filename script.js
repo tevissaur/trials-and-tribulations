@@ -1,8 +1,3 @@
-/*  // TODO: Ask if user wants to save their score and initials to leaderboard, save to localStorage
-       TODO: create button to reveal the leader board in separate HTML element...OVERLAY???
-*/
-
-
 let saveButton = document.createElement('button')
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
@@ -145,7 +140,7 @@ function submitAnswer(e) {
         quizContainer.classList.add('correct')
         console.log('Correct Answer')
         e.target.classList.add('correct')
-        startTime -= 30
+        startTime -= 10
     } else {
         result.innerText = 'Incorrect answer, currently your score is ' + score
         console.log('Wrong Answer')
