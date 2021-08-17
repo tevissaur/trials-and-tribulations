@@ -1,3 +1,9 @@
+/*  // TODO: Ask if user wants to save their score and initials to leaderboard, save to localStorage
+       TODO: create button to reveal the leader board in separate HTML element...OVERLAY???
+*/
+
+
+
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
 let currentQuestion = {
@@ -12,7 +18,8 @@ const questions = [
     {
         question: 'Which keyword defines a function?',
         answers: ['function', 'def', 'define', 'static void main'],
-        correctAnswer: 'function'
+        correctAnswer: 'function',
+        points: 5
     },
     {
         question: 'Which syntax correctly initiates a for loop?',
@@ -20,30 +27,59 @@ const questions = [
             'for (i is 0; i < 10; i+){}',
             'for i in array.length:',
             'for (var i = 0; i < 10; i++){}'],
-        correctAnswer: 'for (var i = 0; i < 10; i++){}'
+        correctAnswer: 'for (var i = 0; i < 10; i++){}',
+        points: 10
     },
     {
-        question: 'DOM stand for:',
+        question: 'DOM stands for:',
         answers: ['Documents Oriented Modeling', 
         'Document Object Model', 
         'Document Object Manipulation', 
         'Documents Over Manuals'],
-        correctAnswer: 'Document Object Model'
+        correctAnswer: 'Document Object Model',
+        points: 5
     },
     {
-        question: '4',
-        answers: [1, 2, 3, 4],
-        correctAnswer: false
+        question: 'Which JavaScript library allows you to "Write less, and do more"?',
+        answers: ['AJAX', 'jQuery', 'React', 'Angular.js'],
+        correctAnswer: 'jQuery',
+        points: 10
     },
     {
-        question: '5',
-        answers: [1, 2, 3, 4],
-        correctAnswer: false
+        question: 'How many miles of mycelium are there per square foot in a forest floor?',
+        answers: ['300', '10', '3.14', '42'],
+        correctAnswer: '300',
+        points: 1000
+    },
+    {
+        question: 'What building is the tallest building the world?',
+        answers: ['Empire State Building', 'Freedom Tower (formerly World Trade Center)', 'Burj Khalifa', 'Sears Tower'],
+        correctAnswer: 'Burj Khalifa',
+        points: 50
+    },
+    {
+        question: 'Which word is legal in the game of Scrabble?',
+        answers: ['QI', 'TE', 'UY', 'OL'],
+        correctAnswer: 'QI',
+        points: 100
+    },
+    {
+        question: 'Which HTML tag defines an unordered list?',
+        answers: ['<ol>', '<list>', '<ul>', '<li>'],
+        correctAnswer: '<ul>',
+        points: 30
+    },
+    {
+        question: 'What is the name of the geographical region',
+        answers: ['300', '10', '3.14', '42'],
+        correctAnswer: '300',
+        points: 1000
     }
+
 ]
 let timer
 let startTime = questions.length * 30
-let points = 0
+let score = 0
 let ansArray
 
 
@@ -65,15 +101,17 @@ function startTimer() {
     }, 1000)
 }
 
+// Pauses timer, and checks if question is correct
 function submitAnswer(e) {
     e.preventDefault()
+    // Removes eventListeners so the user can't click the buttons
     for (i in ansArray) {
         ansArray[i].removeEventListener('click', submitAnswer)
     }
 
     // Make sure the question is correct, if so, add points and changes answer red or green
     if (e.target.value === questions[currentQuestion.questionNum].correctAnswer) {
-        points += 10
+        score += questions[currentQuestion.questionNum].points
         console.log('Correct Answer')
         e.target.classList.add('correct')
         startTime -= 30
@@ -99,12 +137,15 @@ function submitAnswer(e) {
 function updateQuestion() {
     answerContainer.innerHTML = ''
     ansArray = []
+    // Checks if user answered all questions or if time is up
     if (currentQuestion.questionNum > (questions.length - 1)) {
+        endQuiz()
+    } else if (startTime <= 0) {
         endQuiz()
     } else {
         startTimer()
         currentQuestion.elem.textContent = questions[currentQuestion.questionNum]['question']
-        for (let i = 0; i < questions[currentQuestion.questionNum]['answers'].length; i++) {
+        for (i in questions[currentQuestion.questionNum]['answers']) {
             let ansButton = document.createElement('input')
             ansButton.setAttribute('type', 'button')
             ansButton.setAttribute('value', questions[currentQuestion.questionNum].answers[i])
@@ -112,8 +153,8 @@ function updateQuestion() {
             ansButton.addEventListener('click', submitAnswer)
             ansArray.push(ansButton)
         }
-
         console.log('The next question is displayed')
+
     }
     nextQuestionButton.style.visibility = 'hidden'
 }
@@ -121,6 +162,8 @@ function updateQuestion() {
 function endQuiz() {
     startTime = 0
     timeLeft.innerText = startTime
+    currentQuestion.elem.innerText = 'Congrats! You completed the quiz.'
+    answerContainer.innerHTML = score
     console.log('Quiz has ended')
 }
 
