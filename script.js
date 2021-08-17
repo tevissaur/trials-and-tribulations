@@ -1,4 +1,4 @@
-let saveButton = document.createElement('button')
+let saveButton
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
 let currentQuestion = {
@@ -99,6 +99,7 @@ Object.defineProperty(Array.prototype, 'shuffle', {
 });
 
 function startQuiz() {
+    
     startTime = questions.length * 30
     score = 0
     currentQuestion.questionNum = 0
@@ -171,7 +172,7 @@ function updateQuestion() {
     if (currentQuestion.questionNum > (questions.length - 1)) {
         endQuiz('completed')
     } else if (startTime <= 0) {
-        endQuiz()
+        endQuiz('timeout')
     } else {
         startTimer()
         currentQuestion.elem.textContent = questions[currentQuestion.questionNum]['question']
@@ -194,7 +195,7 @@ function updateQuestion() {
 function endQuiz(endStatus) {
     startTime = 0
     timeLeft.innerText = startTime
-    
+    saveButton = document.createElement('button')
     saveButton.innerText = 'Save score?'
     saveButton.setAttribute('type', 'submit')
     saveButton.addEventListener('click', saveResults)
@@ -220,7 +221,7 @@ function saveResults(e) {
     localStorage.setItem('scores', JSON.stringify(scoreArray))
     console.log('Results saved')
     saveButton.style.visibility = 'hidden'
-    displayLeaderboard()
+    window.location.reload(true)
 }
 
 function displayLeaderboard() {
