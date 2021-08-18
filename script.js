@@ -1,3 +1,5 @@
+// Declaring Variables
+
 let saveButton
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
@@ -79,15 +81,15 @@ const questions = [
     }
 
 ]
-let timer
-let startTime
-let score
-let ansArray
+let timer, startTime, score, ansArray
+
+// Sets the user array to an empty string if there are no keys in localStorage
 let userArray = JSON.parse(localStorage.getItem('users')) || []
 let scoreArray = JSON.parse(localStorage.getItem('scores')) || []
 
 // Creates a prototype property for arrays
 // Shuffles the array
+// Got this from Stack overflow at 
 Object.defineProperty(Array.prototype, 'shuffle', {
     value: function () {
         for (let i = this.length - 1; i > 0; i--) {
