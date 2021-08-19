@@ -1,6 +1,4 @@
 // Declaring Variables
-
-let saveButton
 let startButton = document.getElementById('start-quiz')
 let quizContainer = document.getElementById('card-container')
 let currentQuestion = {
@@ -81,7 +79,9 @@ const questions = [
     }
 
 ]
-let timer, startTime, score, ansArray
+let timer, startTime, score, ansArray,saveButton
+
+
 
 // Sets the user array to an empty string if there are no keys in localStorage
 let userArray = JSON.parse(localStorage.getItem('users')) || []
@@ -89,7 +89,8 @@ let scoreArray = JSON.parse(localStorage.getItem('scores')) || []
 
 // Creates a prototype property for arrays
 // Shuffles the array
-// Got this from Stack overflow at 
+// Got this from Stack overflow at https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+// Fisher-Yates Shuffle
 Object.defineProperty(Array.prototype, 'shuffle', {
     value: function () {
         for (let i = this.length - 1; i > 0; i--) {
@@ -100,6 +101,8 @@ Object.defineProperty(Array.prototype, 'shuffle', {
     }
 });
 
+
+// Starts the quiz, and shuffles answers and questions
 function startQuiz() {
     
     startTime = questions.length * 30
@@ -136,9 +139,9 @@ function submitAnswer(e) {
     }
 
     // Make sure the question is correct, if so, add points and changes answer red or green
+    // Subtract 30 seconds for wrong answer and 10 seconds for correct one
     if (e.target.value === questions[currentQuestion.questionNum].correctAnswer) {
         score += questions[currentQuestion.questionNum].points
-
         result.innerText = 'Correct! Currently your score is ' + score
         quizContainer.classList.add('correct')
         console.log('Correct Answer')
@@ -194,6 +197,8 @@ function updateQuestion() {
     nextQuestionButton.style.visibility = 'hidden'
 }
 
+
+// Ends the quiz and checks if time ran out or if user finished all questions
 function endQuiz(endStatus) {
     startTime = 0
     timeLeft.innerText = startTime
@@ -213,6 +218,7 @@ function endQuiz(endStatus) {
     }
 }
 
+// Saves the results in localStorage
 function saveResults(e) {
     e.preventDefault()
     e.target.removeEventListener('click', saveResults)
@@ -226,6 +232,7 @@ function saveResults(e) {
     window.location.reload(true)
 }
 
+// Displays the leaderboard
 function displayLeaderboard() {
     leaderboard.innerHTML = '<tr><th> Initials </th> <th> Score </th></tr> '
     for (i in userArray) {

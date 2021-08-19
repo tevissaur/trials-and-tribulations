@@ -19,3 +19,8 @@ This is a quiz with questions ranging from code, to geography. It was a lot of p
 - Save your results to compare how you did at the end of the quiz!
 - The quiz is timed, so be mindful! It pauses until you click "Next Question"
 - It tracks your current score, and lets you know how many points each question is worth
+
+
+## Future Features
+
+- Redesigning the code to use jQuery

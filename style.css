@@ -2,6 +2,8 @@
     box-sizing: border-box;
 }
 
+/* Card Styling */
+
 #card-container {
     display: flex;
     flex-direction: column;
@@ -55,6 +57,7 @@
 #card-footer {
     margin: auto;
 }
+/* Button styling */
 input[type="submit"] {
     margin: 0 auto;
 }
@@ -80,11 +83,16 @@ button[id="next-question"] {
     margin: auto;
 
 }
+/* Timer and point label styling */
 #time {
     text-align: center;
     margin: 10px;
 }
 
+#worth {
+    text-align: center;
+}
+/* Styling for answer result */
 .wrong {
     background-color: rgba(255, 98, 98, 0.486);
 }
@@ -93,13 +101,12 @@ button[id="next-question"] {
     background-color: rgba(98, 255, 98, 0.486);
 }
 
-#worth {
-    text-align: center;
-}
 
 hr {
     width: 100%;
 }
+
+/* Leaderboard styling */
 table {
     width: 50%;
 }
