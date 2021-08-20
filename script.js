@@ -169,7 +169,6 @@ function submitAnswer(e) {
 
 // Displays the question and generates the buttons for the answers
 function updateQuestion() {
-    result.innerText
     quizContainer.classList.remove('wrong') || quizContainer.classList.remove('correct')
     answerContainer.innerHTML = ''
     ansArray = []
