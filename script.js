@@ -18,7 +18,7 @@ const questions = [
         question: 'Which keyword defines a function?',
         answers: ['function', 'def', 'define', 'static void main'],
         correctAnswer: 'function',
-        points: 5
+        points: 10
     },
     {
         question: 'Which syntax correctly initiates a for loop?',
@@ -36,7 +36,7 @@ const questions = [
             'Document Object Manipulation',
             'Documents Over Manuals'],
         correctAnswer: 'Document Object Model',
-        points: 5
+        points: 10
     },
     {
         question: 'Which JavaScript library allows you to "Write less, and do more"?',
@@ -45,43 +45,31 @@ const questions = [
         points: 10
     },
     {
-        question: 'How many miles of mycelium are there per square foot in a forest floor?',
-        answers: ['300', '10', '3.14', '42'],
-        correctAnswer: '300',
-        points: 1000
-    },
-    {
-        question: 'What building is the tallest building the world?',
-        answers: ['Empire State Building',
-            'Freedom Tower (formerly World Trade Center)',
-            'Burj Khalifa',
-            'Sears Tower'],
-        correctAnswer: 'Burj Khalifa',
-        points: 50
-    },
-    {
-        question: 'Which word is legal in the game of Scrabble?',
-        answers: ['QI', 'TE', 'UY', 'OL'],
-        correctAnswer: 'QI',
-        points: 100
-    },
-    {
         question: 'Which HTML tag defines an unordered list?',
         answers: ['<ol>', '<list>', '<ul>', '<li>'],
         correctAnswer: '<ul>',
-        points: 30
+        points: 10
     },
     {
-        question: 'What is the name of the geographical region where civilization is theorized to have started?',
-        answers: ['Fertile Valley', 'Fertile Crescent', 'The Dawnland', 'Serengetti'],
-        correctAnswer: 'Fertile Crescent',
-        points: 1000
+        question: 'What method shuffles an array?',
+        answers: ['shuffle()', 'randomize()','There is no built in shuffle method'],
+        correctAnswer: 'There is no built in shuffle method',
+        points: 10
+    },
+    {
+        question: 'Is javascript an interpreted language or a compiled language?',
+        answers: ['Interpreted', 'Compiled','What is javascript?'],
+        correctAnswer: 'Interpreted',
+        points: 20
+    },
+    {
+        question: 'What are APIs?',
+        answers: ['Automatic Programming Interface', 'Application Programming Interface','Aerospace Plummage Ions', 'Are Pizzas Interpolated?'],
+        correctAnswer: 'Application Programming Interface',
+        points: 20
     }
-
 ]
 let timer, startTime, score, ansArray,saveButton
-
-
 
 // Sets the user array to an empty string if there are no keys in localStorage
 let userArray = JSON.parse(localStorage.getItem('users')) || []
@@ -100,7 +88,6 @@ Object.defineProperty(Array.prototype, 'shuffle', {
         return this;
     }
 });
-
 
 // Starts the quiz, and shuffles answers and questions
 function startQuiz() {
@@ -166,7 +153,6 @@ function submitAnswer(e) {
     nextQuestionButton.style.visibility = 'visible'
 }
 
-
 // Displays the question and generates the buttons for the answers
 function updateQuestion() {
     quizContainer.classList.remove('wrong') || quizContainer.classList.remove('correct')
@@ -195,7 +181,6 @@ function updateQuestion() {
     }
     nextQuestionButton.style.visibility = 'hidden'
 }
-
 
 // Ends the quiz and checks if time ran out or if user finished all questions
 function endQuiz(endStatus) {
@@ -240,7 +225,6 @@ function displayLeaderboard() {
         let tdScore = document.createElement('td')
         tdInitials.innerText = userArray[i]
         tdScore.innerText = scoreArray[i]
-
         tr.appendChild(tdInitials)
         tr.appendChild(tdScore)
         leaderboard.appendChild(tr)
